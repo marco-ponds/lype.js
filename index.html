@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="js/lib/classy.js"></script>
+		<script type="text/javascript" src="js/lib/codemirror.js"></script>
+		<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="js/lib/addons/javascript.js"></script>
+		<script type="text/javascript" src="js/lib/addons/active-line.js"></script>
+		<script type="text/javascript" src="js/lib/addons/matchbrackets.js"></script>
+		<script type="text/javascript" src="js/lib/addons/closebrackets.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/app.css">
+		<link rel="stylesheet" type="text/css" href="css/console_themes/monokai.css">
+		<link rel="stylesheet" type="text/css" href="css/codemirror.css">
+		<link rel="stylesheet" type="text/css" href="css/themes/monokai.css">
+
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
+
+		<script type="text/javascript" src="js/app/main.js"></script>
+	</head>
+	<body>
+		<div id="editor">
+		</div>
+		<div id="result" class="monokai">
+			<ul id="result_content">
+			</ul>
+		</div>
+
+		<ul id="messages">
+		</ul>
+
+		<i class="fa fa-exclamation-circle" id="errorAlert"></i>
+
+		<script type="text/javascript">
+			var app;
+			window.onload = function() {
+				app = new App();
+			}
+		</script>
+	</body>
+</html>
