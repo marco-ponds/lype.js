@@ -5,15 +5,25 @@
 }
 
 #tabs ul li.tab.inactive {
-	border-bottom: 30px solid #3a3a38;
+	background-color: #3a3a38;
 	color:#898c88;
 }
 
 #tabs ul li.tab.active {
-	border-bottom: 30px solid #272822;
+	background-color: #272822;
 	color:white;
+	border-top: 1px solid #2e2f2a;
+	border-left: 1px solid #2e2f2a;
+	border-right: 1px solid #2e2f2a;
+	border-bottom: 1px solid #272822;
+	z-index: 999;
 }
 
 #tabs, #upper_console {
 	background-color: #1B221E;
+}
+
+#tabs ul li#add_tab:hover {
+	color: #fff;
+	background-color: #3a3a38;
 }

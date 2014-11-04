@@ -1,5 +1,3 @@
-include("app/Helper");
-
 Class("Editor", {
 
 	Editor : function(id) {
@@ -12,13 +10,25 @@ Class("Editor", {
 		});
 
 		this.text = [];
-		this.result = document.getElementById("result_content");
-		this.helper = new Helper();
-		this.lastUpdateLine = 0; //reference to last line where eval was executed
+
+		this.keyListener = new keypress.Listener();
 
 		this.configureConsole();
 		this.setCodeListeners();
 
+	},
+
+	focus : function() {
+		this.codeMirror.focus();
+	},
+
+	download : function() {
+		var filename = $("#tab_"+app.currentTab + " span").text();
+		var text = app.editors[app.currentTab].text.join("\n");
+		var pom = document.createElement('a');
+		pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+		pom.setAttribute('download', filename);
+		pom.click();
 	},
 
 	saveText : function() {
@@ -30,33 +40,36 @@ Class("Editor", {
 	},
 
 	_textToString : function() {
-		return this.text.join("\n");
+		return this.text.join(" ");
 	},
 
 	setCodeListeners : function() {
 		this.codeMirror.on("change", function(istance, changes) {
-			var currentInner = app.editor.result.innerHTML;
+			var currentInner = app.result.innerHTML;
 			try {
-				app.editor.saveText();
-				app.editor.result.innerHTML = "";
-				eval(app.editor._textToString());
-				app.editor.toggleError(false);
+				app.result.innerHTML = "";
+				app._eval();
+				app.editors[app.currentTab].toggleError(false);
 			} catch (e) {
-				app.editor.toggleError(true);
-				//app.editor.old_log(e);
-				app.editor.result.innerHTML = currentInner;
+				app.editors[app.currentTab].toggleError(true);
+				//app.editors[app.currentTab].old_log(e);
+				app.result.innerHTML = currentInner;
+				//console.log(e.message);
 			}
+		});
+
+		this.keyListener.simple_combo("ctrl s", function() {
+			app.editors[app.currentTab].download();
 		});
 	},
 
 	configureConsole : function() {
-		var self = this;
 		this.old_log = console.log;
 		console.log = function(obj) {
 			if (typeof obj == "string") {
-				self.result.appendChild(self.helper.li(" ", "string", '"'+obj+'"'));
+				app.result.appendChild(app.helper.li(" ", "string", '"'+obj+'"'));
 			} else if (typeof obj == "object") {
-				self.result.appendChild(self.helper.parseElement(obj));
+				app.result.appendChild(app.helper.parseElement(obj));
 			}
 		};
 
@@ -76,19 +89,19 @@ Class("Editor", {
 	flash : function (message, type) {
 		switch(type) {
 			case "log" : {
-				document.getElementById("messages").appendChild(app.editor.helper.li("", "log", message));
+				document.getElementById("messages").appendChild(app.helper.li("", "log", message));
 				break;
 			}
 			case "warn" : {
-				document.getElementById("messages").appendChild(app.editor.helper.li("", "warn", message));
+				document.getElementById("messages").appendChild(app.helper.li("", "warn", message));
 				break;
 			}
 			case "err" : {
-				document.getElementById("messages").appendChild(app.editor.helper.li("", "err", message));
+				document.getElementById("messages").appendChild(app.helper.li("", "err", message));
 				break;
 			}
 			case "info" : {
-				document.getElementById("messages").appendChild(app.editor.helper.li("", "info", message));
+				document.getElementById("messages").appendChild(app.helper.li("", "info", message));
 				break;
 			}
 			default : break;

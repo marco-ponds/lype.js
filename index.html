@@ -4,6 +4,7 @@
 		<script type="text/javascript" src="js/lib/classy.js"></script>
 		<script type="text/javascript" src="js/lib/codemirror.js"></script>
 		<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="js/lib/keypress.js"></script>
 		<script type="text/javascript" src="js/lib/addons/javascript.js"></script>
 		<script type="text/javascript" src="js/lib/addons/active-line.js"></script>
 		<script type="text/javascript" src="js/lib/addons/matchbrackets.js"></script>
@@ -22,24 +23,25 @@
 	<body>
 		<div id="tabs">
 			<ul>
-				<li class="tab active">
+				<li id="tab_0" class="tab active">
 					<span contenteditable="true">Main.js</span>
 				</li>
-				<li class="tab inactive">
-					<span contenteditable="true">Main.js</span>
-				</li>
-				<li class="tab inactive">
-					<span contenteditable="true">Main.js</span>
-				</li>
-				<li id="add_tab">
-					+
-				</li>
+				<li id="add_tab">+</li>
 			</ul>
 		</div>
+
 		<div id="upper_console"></div>
 		<div id="main_container">
-			<div id="editor">
+
+
+			<div class="editor visible" id="editor_0">
 			</div>
+			<div class="editor invisible" id="editor_1">
+			</div>
+			<div class="editor invisible" id="editor_2">
+			</div>
+
+
 			<div id="result" class="monokai">
 				<ul id="result_content">
 				</ul>

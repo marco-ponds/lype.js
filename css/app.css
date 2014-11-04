@@ -9,22 +9,31 @@ body {
 
 #main_container {
 	position: absolute;
-	top: 50px;
-	height: 100%;
+	top: 10%;
+	height: 80%;
 	width: 100%;
 	padding-top: 20px;
+	border-top: 1px solid #2e2f2a;
+}
+
+.visible {
+	display: block !important;
+}
+
+.invisible {
+	display: none !important;
 }
 
 #tabs {
 	position: absolute;
-	height: 50px;
+	height: 10%;
 	width: 50%;
 	background-color: white;
 }
 
 #upper_console {
 	position: absolute;
-	height: 50px;
+	height: 10%;
 	width: 50%;
 	left: 50%;
 }
@@ -32,8 +41,9 @@ body {
 #tabs ul {
 	margin:0;
 	padding: 0;
-	top: 0px;
+	top: 40%;
 	position: relative;
+	height: 60%;
 }
 
 #tabs ul li {
@@ -41,21 +51,18 @@ body {
 }
 
 #tabs ul li.tab {
-	/*
 	list-style: none;
 	background-color: #272822;
-	height: 30px;
+	height: 50%;
 	position: relative;
 	width: 100px;
 	text-align: center;
 	display: inline;
-	*/
-	/*
 	padding: 8px;
 	padding-left: 20px;
 	padding-right: 20px;
-	*/
 
+/*
 	border-bottom: 30px solid #fff;
 	border-left: 20px solid transparent;
 	border-right: 20px solid transparent;
@@ -70,13 +77,19 @@ body {
 	font-style: italic;
 
 	display: inline;
-	/* display: inline; */
 	margin: 0;
+
+*/
 	/* border-bottom: 50px solid white; */  
 	/* border-left: 30px solid transparent; */  
 	/* border-right: 30px solid transparent; */  
 	/* height: 0; */  
 	/* width: 100px; */
+	top: 43%;
+	margin-left: 5px;
+	/* margin-right: 2px; */
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
 }
 
 #tabs ul li#add_tab {
@@ -89,16 +102,18 @@ body {
 	background-color: #272822;
 	color: white;
 	margin-top: 20px;
+	margin-left: 6px;
+	border: 1px solid #2e2f2a;
 	position: relative;
-	top: 22px;
+	top: 40%;
 }
 
 #tabs ul li span {
 	position: relative;
-	top: 20px;
+	/* top: 20px; */
 }
 
-#editor {
+.editor {
 	position:absolute;
 	height:100%;
 	width: 50%
