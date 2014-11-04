@@ -3,6 +3,11 @@ include("app/Editor");
 Class("App", {
 
 	App : function() {
-		this.editor = new Editor();
+		$('body').addClass("monokai");
+
+		this.availableThemes = ["monokai"];
+
+		this.currentTheme = "monokai";
+		this.editor = new Editor("editor");
 	},
 });

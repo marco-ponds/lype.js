@@ -2,10 +2,10 @@ include("app/Helper");
 
 Class("Editor", {
 
-	Editor : function() {
-		this.codeMirror = CodeMirror(document.getElementById("editor"), {
-			lineNumbers: true,	
-			mode:  "javascript",
+	Editor : function(id) {
+		this.codeMirror = CodeMirror(document.getElementById(id), {
+			lineNumbers: true,
+			mode: "javascript",
 			styleActiveLine: true,
 			matchBrackets: true,
 			theme: "monokai"
@@ -58,12 +58,11 @@ Class("Editor", {
 			} else if (typeof obj == "object") {
 				self.result.appendChild(self.helper.parseElement(obj));
 			}
-		}
-		/*
-		console.log = function(obj) {
-			app.editor.print(obj);
-			app.editor.old_log(obj);
-		}*/
+		};
+
+		alert = function(obj) {
+			console.log("Alert has been disabled. Sorry.");
+		};
 	},
 
 	toggleError : function(flag) {

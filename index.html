@@ -20,17 +20,36 @@
 		<script type="text/javascript" src="js/app/main.js"></script>
 	</head>
 	<body>
-		<div id="editor">
-		</div>
-		<div id="result" class="monokai">
-			<ul id="result_content">
+		<div id="tabs">
+			<ul>
+				<li class="tab active">
+					<span contenteditable="true">Main.js</span>
+				</li>
+				<li class="tab inactive">
+					<span contenteditable="true">Main.js</span>
+				</li>
+				<li class="tab inactive">
+					<span contenteditable="true">Main.js</span>
+				</li>
+				<li id="add_tab">
+					+
+				</li>
 			</ul>
 		</div>
+		<div id="upper_console"></div>
+		<div id="main_container">
+			<div id="editor">
+			</div>
+			<div id="result" class="monokai">
+				<ul id="result_content">
+				</ul>
+			</div>
 
-		<ul id="messages">
-		</ul>
+			<ul id="messages">
+			</ul>
 
-		<i class="fa fa-exclamation-circle" id="errorAlert"></i>
+			<i class="fa fa-exclamation-circle" id="errorAlert"></i>
+		</div>
 
 		<script type="text/javascript">
 			var app;
