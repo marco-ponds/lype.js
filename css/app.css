@@ -12,7 +12,6 @@ body {
 	top: 80px;
 	/* height: 80%; */
 	width: 100%;
-	padding-top: 20px;
 	border-top: 1px solid #2e2f2a;
 }
 
@@ -36,6 +35,10 @@ body {
 	height: 80px;
 	width: 50%;
 	left: 50%;
+}
+
+.editor {
+	padding-top: 20px;
 }
 
 #tabs ul {
@@ -117,6 +120,8 @@ body {
 	position:absolute;
 	height:100%;
 	width: 50%
+;
+	border-right: 1px solid #2e2f2a;
 }
 
 #messages {
@@ -172,6 +177,7 @@ body {
 	width:50%;
 	left: 50%;
 	overflow: auto;
+	margin-left: 1px;
 }
 
 #result * {

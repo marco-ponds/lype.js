@@ -61,6 +61,10 @@ Class("Editor", {
 		this.keyListener.simple_combo("ctrl s", function() {
 			app.editors[app.currentTab].download();
 		});
+
+		this.keyListener.simple_combo("command s", function() {
+			app.editors[app.currentTab].download();
+		});
 	},
 
 	configureConsole : function() {
