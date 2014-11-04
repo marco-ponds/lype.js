@@ -7,6 +7,8 @@ Class("App", {
 
 	App : function() {
 		$('body').addClass("monokai");
+		var height = ($(document).height() - 140) + "px";
+		$('#main_container').css("height", height);
 		$('#add_tab').on("click", function() {
 			app.addNewTab();
 		});
