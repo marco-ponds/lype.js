@@ -139,14 +139,14 @@ Class("Helper", {
 	},
 
 	parseElement : function(object) {
-		var ul = app.editor.helper.ul(""+this.counter, "object_root", "");
+		var ul = app.helper.ul(""+this.counter, "object_root", "");
 		ul.appendChild(this.i(this.counter+"_selector", "fa fa-caret-right",""));
 		ul.innerHTML += object.constructor.name;
 		this.counter += 1;
 
 		for (var prop in object ) {
 			//if (object.hasOwnProperty(prop)) {
-				ul.appendChild(app.editor.helper.li(prop, "object_prop", prop));
+				ul.appendChild(app.helper.li(prop, "object_prop", prop));
 			//}
 		}
 		$(ul).data("isOpen", "false");

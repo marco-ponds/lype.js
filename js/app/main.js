@@ -48,7 +48,11 @@ Class("App", {
 		
 		this.numTab ++;
 		//selecting new tab
-		$('#add_tab').before(app.helper.li("tab_"+(app.numTab -1), "tab inactive", "<span contenteditable='true'>Default.js</span>"));
+		var filename = prompt("Please insert script's name.");
+		if (!(typeof filename == "string")) {
+			console.log("Please use a valid filename.");
+		}
+		$('#add_tab').before(app.helper.li("tab_"+(app.numTab -1), "tab inactive", "<span>"+filename+"</span>"));
 		this.setTabListener();
 		this.createEditor((app.numTab -1));
 		this.selectTab((app.numTab -1));
