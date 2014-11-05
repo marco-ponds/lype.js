@@ -1,5 +1,6 @@
 include("app/Editor");
 include("app/Helper");
+include("app/Console");
 
 Class("App", {
 
@@ -8,19 +9,9 @@ Class("App", {
 
 	App : function() {
 		$('body').addClass("monokai");
-		var height = ($(document).height() - 150) + "px";
-		$('#main_container').css("height", height);
-		$('#coffee_compiler').css("top", ($('#main_container').height() + 30) + "px");
-		
-		$('#add_tab').on("click", function() {
-			app.addNewTab();
-		});
-		$('#coffee_compiler').on("click", function() {
-			if (app.editors[app.currentTab].type == "coffeescript") {
-				app.editors[app.currentTab].compile();
-			}
-		});
 
+		this.setSizes();
+		this.setClickListeners();
 		this.setTabListener();
 
 		this.availableThemes = ["monokai"];
@@ -29,11 +20,37 @@ Class("App", {
 		this.currentTab = 0;
 		this.numTab = 1;
 		this.editors = [];
-		this.createEditor(this.currentTab, "root.js", "javascript");
 		this.result = document.getElementById("result_content");
 
-
+		this.console = new Console();
+		//this.console.set();
 		this.helper = new Helper();
+
+		this.createEditor(this.currentTab, "root.js", "javascript");
+
+	},
+
+	handleResize : function() {
+		app.setSizes();
+	},
+
+	setSizes : function() {
+		var height = ($(document).height() - 150) + "px";
+		$('#main_container').css("height", height);
+		$('#coffee_compiler').css("top", ($('#main_container').height() + 30) + "px");
+	},
+
+	setClickListeners : function() {
+		//new tab button
+		$('#add_tab').on("click", function() {
+			app.addNewTab();
+		});
+		//coffee compiler button
+		$('#coffee_compiler').on("click", function() {
+			if (app.editors[app.currentTab].type == "coffeescript") {
+				app.editors[app.currentTab].compile();
+			}
+		});
 	},
 
 	setTabListener : function() {
@@ -46,6 +63,7 @@ Class("App", {
 	},
 
 	_eval : function() {
+		app.console.clearAllIntervals();
 		app.result.innerHTML = "";
 		for (var i=0; i< app.numTab; i++) {
 			switch (app.editors[i].type) {

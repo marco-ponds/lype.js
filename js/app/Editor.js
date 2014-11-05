@@ -16,7 +16,6 @@ Class("Editor", {
 			theme: "monokai"
 		});
 
-		this.configureConsole();
 		this.setCodeListeners();
 
 	},
@@ -74,21 +73,6 @@ Class("Editor", {
 		this.keyListener.simple_combo("command s", function() {
 			app.editors[app.currentTab].download();
 		});
-	},
-
-	configureConsole : function() {
-		this.old_log = console.log;
-		console.log = function(obj) {
-			if (typeof obj == "string") {
-				app.result.appendChild(app.helper.li(" ", "string", '"'+obj+'"'));
-			} else if (typeof obj == "object") {
-				app.result.appendChild(app.helper.parseElement(obj));
-			}
-		};
-
-		alert = function(obj) {
-			console.log("Alert has been disabled. Sorry.");
-		};
 	},
 
 	toggleError : function(flag) {
