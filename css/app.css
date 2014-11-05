@@ -171,6 +171,14 @@ body {
 	top: 93%;
 }
 
+#coffee_compiler {
+	position: absolute;
+border: 1px solid #555;
+padding: 8px;
+left: 41%;
+border-radius: 4px;
+}
+
 #result {
 	position:absolute;
 	height:100%;

@@ -5,7 +5,9 @@
 		<script type="text/javascript" src="js/lib/codemirror.js"></script>
 		<script type="text/javascript" src="js/lib/jquery.min.js"></script>
 		<script type="text/javascript" src="js/lib/keypress.js"></script>
+		<script type="text/javascript" src="js/lib/coffee-script.js"></script>
 		<script type="text/javascript" src="js/lib/addons/javascript.js"></script>
+		<script type="text/javascript" src="js/lib/addons/coffeescript.js"></script>
 		<script type="text/javascript" src="js/lib/addons/active-line.js"></script>
 		<script type="text/javascript" src="js/lib/addons/matchbrackets.js"></script>
 		<script type="text/javascript" src="js/lib/addons/closebrackets.js"></script>
@@ -24,7 +26,7 @@
 		<div id="tabs">
 			<ul>
 				<li id="tab_0" class="tab active">
-					<span>Main.js</span>
+					<span>Root.js</span>
 				</li>
 				<li id="add_tab">+</li>
 			</ul>
@@ -36,11 +38,6 @@
 
 			<div class="editor visible" id="editor_0">
 			</div>
-			<div class="editor invisible" id="editor_1">
-			</div>
-			<div class="editor invisible" id="editor_2">
-			</div>
-
 
 			<div id="result" class="monokai">
 				<ul id="result_content">
@@ -51,6 +48,8 @@
 			</ul>
 
 			<i class="fa fa-exclamation-circle" id="errorAlert"></i>
+
+			<div id="coffee_compiler" class="invisible">COMPILE</div>
 		</div>
 
 		<script type="text/javascript">

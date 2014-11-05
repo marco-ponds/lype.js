@@ -23,7 +23,7 @@
 	background-color: #1B221E;
 }
 
-#tabs ul li#add_tab:hover {
+#tabs ul li#add_tab:hover, #coffee_compiler:hover {
 	color: #fff;
 	background-color: #3a3a38;
 }

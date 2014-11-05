@@ -1,17 +1,20 @@
 Class("Editor", {
 
-	Editor : function(id) {
+	Editor : function(id, name, type) {
+
+		this.text = [];
+		this.name = name;
+		this.type = type;
+		this.compiled = "";
+		this.keyListener = new keypress.Listener();
+
 		this.codeMirror = CodeMirror(document.getElementById(id), {
 			lineNumbers: true,
-			mode: "javascript",
+			mode: type,
 			styleActiveLine: true,
 			matchBrackets: true,
 			theme: "monokai"
 		});
-
-		this.text = [];
-
-		this.keyListener = new keypress.Listener();
 
 		this.configureConsole();
 		this.setCodeListeners();
@@ -31,6 +34,13 @@ Class("Editor", {
 		pom.click();
 	},
 
+	compile : function() {
+		this.saveText();
+		var compiled = CoffeeScript.compile(this.text.join("\n")).split("\n");
+		this.compiled = compiled.slice(1, compiled.length -2).join("\n");
+		app._eval();
+	},
+
 	saveText : function() {
 		var lines = this.codeMirror.display.view;
 		this.text = [];
@@ -47,7 +57,6 @@ Class("Editor", {
 		this.codeMirror.on("change", function(istance, changes) {
 			var currentInner = app.result.innerHTML;
 			try {
-				app.result.innerHTML = "";
 				app._eval();
 				app.editors[app.currentTab].toggleError(false);
 			} catch (e) {
@@ -88,28 +97,5 @@ Class("Editor", {
 		} else {
 			$("#errorAlert").css("display", "none");
 		}
-	},
-
-	flash : function (message, type) {
-		switch(type) {
-			case "log" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "log", message));
-				break;
-			}
-			case "warn" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "warn", message));
-				break;
-			}
-			case "err" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "err", message));
-				break;
-			}
-			case "info" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "info", message));
-				break;
-			}
-			default : break;
-		}
 	}
-
 });
