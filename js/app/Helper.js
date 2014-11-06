@@ -140,8 +140,8 @@ Class("Helper", {
 
 	parseElement : function(object) {
 		var ul = app.helper.ul(""+this.counter, "object_root", "");
-		ul.appendChild(this.i(this.counter+"_selector", "fa fa-caret-right",""));
-		ul.innerHTML += object.constructor.name;
+		ul.appendChild(this.i(this.counter+"_selector", "fa fa-caret-right",object.constructor.name));
+		//ul.innerHTML += object.constructor.name;
 		this.counter += 1;
 
 		for (var prop in object ) {

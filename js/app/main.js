@@ -6,10 +6,15 @@ Class("App", {
 
 	MAX_NUM_TABS : 5,
 	FILE_EXTENSIONS : ["js", "coffee"],
+	MIN_HEIGHT : 600,
+	MIN_WIDTH : 800,
+	HEIGHT : 600,
+	WIDTH : 800,
 
 	App : function() {
 		$('body').addClass("monokai");
 
+		this.detectEnvinronment();
 		this.setSizes();
 		this.setClickListeners();
 		this.setTabListener();
@@ -22,6 +27,9 @@ Class("App", {
 		this.editors = [];
 		this.result = document.getElementById("result_content");
 
+		//node-webkit
+		this.enlarged = false;
+
 		this.console = new Console();
 		//this.console.set();
 		this.helper = new Helper();
@@ -32,6 +40,22 @@ Class("App", {
 
 	handleResize : function() {
 		app.setSizes();
+	},
+
+	detectEnvinronment : function() {
+		//trying to detect if we are within node-webkit or not
+		var os="Unknown OS";
+		if (navigator.appVersion.indexOf("Win")!=-1) os="Windows";
+		if (navigator.appVersion.indexOf("Mac")!=-1) os="MacOS";
+		if (navigator.appVersion.indexOf("X11")!=-1) os="UNIX";
+		if (navigator.appVersion.indexOf("Linux")!=-1) os="Linux";
+		this.os = os;
+		if (window.process) {
+			//node-webkit
+			this.environment = "node-webkit";
+		} else {
+			this.environment = "browser";
+		}
 	},
 
 	setSizes : function() {
@@ -51,6 +75,49 @@ Class("App", {
 				app.editors[app.currentTab].compile();
 			}
 		});
+		//if we are using node-webkit, we must provide a custom toolbar
+		if (this.environment == "node-webkit") {
+			console.log("setting toolbar");
+			this.setToolbar();
+		} else {
+			console.log("not setting toolbar");
+		}
+	},
+
+	setToolbar : function() {
+		var toShow = this.os;
+		var toHide = (this.os == "MacOS") ? "Windows" : "MacOS";
+		$('.toolbar.'+toShow).removeClass().addClass("toolbar visible " + toShow);
+		$('.toolbar.'+toHide).removeClass().addClass("toolbar invisible " + toHide);
+
+		$('#exit').on("click", function() {
+			console.log("inside exit click");
+			if (process) {
+				process.kill();
+			}
+		});
+
+		$('#reduce').on("click", function() {
+			console.log("inside reduce click");
+		});
+
+		$('#enlarge').on("click", function() {
+			if (!app.enlarged) {
+				app.gui = require("nw.gui");
+				app.window = app.gui.Window.get();
+				app.window.resizeTo(window.screen.width, window.screen.height - 20);
+				app.window.moveTo(0,20);
+				app.enlarged = true;
+			} else {
+				app.gui = require("nw.gui");
+				app.window = app.gui.Window.get();
+				app.window.resizeTo(app.WIDTH, app.HEIGHT);
+				//app.window.moveTo(window.screen.width/4, window.screen.height/4);
+				app.window.setPosition("center");
+				app.enlarged = false;
+			}
+		});
+
 	},
 
 	setTabListener : function() {

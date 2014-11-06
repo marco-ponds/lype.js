@@ -7,13 +7,13 @@
   "window": {
     "title": "Lype",
     "icon": "link.png",
-    "toolbar": true,
-    "frame": true,
+    "toolbar": false,
+    "frame": false,
     "width": 800,
-    "height": 500,
+    "height": 600,
     "position": "mouse",
-    "min_width": 400,
-    "min_height": 200,
+    "min_width": 800,
+    "min_height": 600,
     "resizable": true,
     "as_desktop": true
   },

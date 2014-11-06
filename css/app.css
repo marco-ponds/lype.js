@@ -1,6 +1,11 @@
 body {
 	margin : 0;
 	padding: 0;
+	-webkit-app-region: drag;
+}
+
+body * {
+	-webkit-app-region: no-drag;
 }
 
 .CodeMirror {
@@ -39,6 +44,51 @@ body {
 
 .editor {
 	padding-top: 20px;
+}
+
+.toolbar {
+	position: fixed;
+	height:	40px;
+	width: 100%;
+	top: 0;
+	left: 0;
+	margin: 0;
+	z-index: 999;
+}
+
+.toolbar.MacOS div {
+	height: 10px;
+	width: 10px;
+	margin: 5px;
+	border-radius: 100%;
+	background: white;
+	position: relative;
+	float: left;
+}
+
+.toolbar.MacOS div#exit {
+	background-color: #D74243;
+	margin-left: 10px;
+}
+
+.toolbar.MacOS div#exit:hover {
+	background-color: #A1151A;
+}
+
+.toolbar.MacOS div#enlarge {
+	background-color: #0EBF55;
+}
+
+.toolbar.MacOS div#enlarge:hover {
+	background-color: #007322;
+}
+
+.toolbar.MacOS div#reduce {
+	background-color: #FABB51;
+}
+
+.toolbar.MacOS div#reduce:hover {
+	background-color: #BC782A;
 }
 
 #tabs ul {
@@ -208,6 +258,17 @@ border-radius: 4px;
 .object_root {
 	padding-left: 0;
 	color: rgb(33, 189, 16);
+}
+
+.object_root i {
+	font-family: monospace;
+}
+
+.object_root i:before {
+	top: 2px;
+	position: relative;
+	margin-right: 5px;
+	font-family: "FontAwesome";
 }
 /*
 .object_root:before {
