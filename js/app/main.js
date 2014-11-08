@@ -145,7 +145,7 @@ Class("App", {
 					reason : error.reason,
 					index : k
 				});
-				$($('.errorLine')[k]).html(error.reason);
+				//$($('.errorLine')[k]).html(error.reason);
 				//worker.terminate();
 			}
 		});

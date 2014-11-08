@@ -254,6 +254,9 @@ border-radius: 4px;
 
 #result li {
 	list-style: none;
+	margin-bottom: 10px;
+	/* position: relative; */
+	clear: both;
 }
 
 .string{
@@ -263,6 +266,9 @@ border-radius: 4px;
 .object_root {
 	padding-left: 0;
 	color: rgb(33, 189, 16);
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border: 1px solid white;
 }
 
 .object_root i {
@@ -287,9 +293,28 @@ border-radius: 4px;
 .object_root .object_prop {
 	color:yellow;
 	margin-left:20px;
+	margin-bottom: 20px;
 }
 
 .object_prop {
 	color: green;
 	display: none;
+}
+
+.object_prop span#key {
+    height: 100%;
+
+    /* position: relative; */
+    float: left;
+    clear: both;
+    color: greenyellow;
+}
+
+.object_prop span#value {
+	margin-right: 20px;
+	margin-left: 100PX;
+	float: right;
+	TEXT-ALIGN: justify;
+	/* position: relative; */
+	color: cadetblue;
 }

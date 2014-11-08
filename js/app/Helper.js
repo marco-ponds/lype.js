@@ -147,8 +147,8 @@ Class("Helper", {
 		for (var prop in object ) {
 			//if (object.hasOwnProperty(prop)) {
 				var li = app.helper.li(prop, "object_prop", "");
-				li.appendChild(app.helper.span("", "", prop));
-				li.appendChild(app.helper.span("", "", object[prop]));
+				li.appendChild(app.helper.span("key", "", prop));
+				li.appendChild(app.helper.span("value", "", object[prop]));
 				ul.appendChild(li);
 			//}
 		}
