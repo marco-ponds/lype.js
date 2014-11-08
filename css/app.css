@@ -261,6 +261,10 @@ border-radius: 4px;
 	clear: both;
 }
 
+#result_content {
+	padding-right: 20px;
+}
+
 .string{
 	color: rgb(133,133,255);
 }
@@ -296,6 +300,7 @@ border-radius: 4px;
 	color:yellow;
 	margin-left:20px;
 	margin-bottom: 20px;
+	border-bottom: 1px solid grey;
 }
 
 .object_prop {
@@ -319,4 +324,6 @@ border-radius: 4px;
 	TEXT-ALIGN: justify;
 	/* position: relative; */
 	color: cadetblue;
+	max-width: 800px;
+	word-wrap: break-word;
 }

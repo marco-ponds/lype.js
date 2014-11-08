@@ -24,7 +24,11 @@ Class("Helper", {
 				var li = document.createElement("li");
 				li.className = c;
 				li.id = id;
-				li.innerHTML = content;
+				if (content.indexOf("<")!=-1) {
+					li.innerText = content;
+				} else {
+					li.innerHTML = content;
+				}
 				return li;
 			}
 		}
@@ -50,7 +54,11 @@ Class("Helper", {
 				var i = document.createElement("i");
 				i.className = c;
 				i.id = id;
-				i.innerHTML = content;
+				if (content.indexOf("<")!=-1) {
+					i.innerText = content;
+				} else {
+					i.innerHTML = content;
+				}
 				return i;
 			}
 		}
@@ -76,7 +84,11 @@ Class("Helper", {
 				var ul = document.createElement("ul");
 				ul.className = c;
 				ul.id = id;
-				ul.innerHTML = content;
+				if (content.indexOf("<")!=-1) {
+					ul.innerText = content;
+				} else {
+					ul.innerHTML = content;
+				}
 				return ul;
 			}
 		}
@@ -102,7 +114,11 @@ Class("Helper", {
 				var div = document.createElement("div");
 				div.className = c;
 				div.id = id;
-				div.innerHTML = content;
+				if (content.indexOf("<")!=-1) {
+					div.innerText = content;
+				} else {
+					div.innerHTML = content;
+				}
 				return div;
 			}
 		}
@@ -128,7 +144,11 @@ Class("Helper", {
 				var span = document.createElement("span");
 				span.className = c;
 				span.id = id;
-				span.innerHTML = content;
+				if (content.indexOf("<")!=-1) {
+					span.innerText = content;
+				} else {
+					span.innerHTML = content;
+				}
 				return span;
 			}
 		}
@@ -148,7 +168,8 @@ Class("Helper", {
 			//if (object.hasOwnProperty(prop)) {
 				var li = app.helper.li(prop, "object_prop", "");
 				li.appendChild(app.helper.span("key", "", prop));
-				li.appendChild(app.helper.span("value", "", object[prop].replace('"', "'")));
+				var value = 
+				li.appendChild(app.helper.span("value", "", ""+object[prop]));
 				ul.appendChild(li);
 			//}
 		}
