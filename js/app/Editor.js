@@ -6,6 +6,7 @@ Class("Editor", {
 		this.name = name;
 		this.type = type;
 		this.errors = [];
+		this.tooltips = [];
 		this.compiled = "";
 		this.keyListener = new keypress.Listener();
 
@@ -63,6 +64,17 @@ Class("Editor", {
 			this.codeMirror.removeLineClass(this.errors[i].line, "background", "errorLine");
 		}
 		this.errors = [];
+	},
+
+	saveTooltip : function(tooltip) {
+		this.tooltips.push(tooltip);
+	},
+
+	removeAllJBoxes : function() {
+		for (var i in this.tooltips) {
+			this.tooltips[i].destroy();
+		}
+		this.tooltips = [];
 	},
 
 	setCodeListeners : function() {

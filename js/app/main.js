@@ -145,8 +145,13 @@ Class("App", {
 					reason : error.reason,
 					index : k
 				});
-				//$($('.errorLine')[k]).html(error.reason);
-				//worker.terminate();
+				$($('.errorLine')[k]).attr("title",error.reason);
+				var t = new jBox('Tooltip', {
+					theme : "TooltipDark",
+					closeOnMouseLeave : true
+				});
+				t.attach($($('.errorLine')[k]));
+				app.editors[e.data.toCheck].saveTooltip(t);
 			}
 		});
 	},
@@ -155,6 +160,7 @@ Class("App", {
 		for (var i=0; i< app.numTab; i++) {
 			if (app.editors[i].type == "javascript") {
 				app.editors[i].removeAllErrors();
+				app.editors[i].removeAllJBoxes();
 				app.editors[i].saveText();
 				var text = app.editors[i].text.join("\n");
 				text = app.LINT_GLOBALS + text;				

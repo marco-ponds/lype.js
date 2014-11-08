@@ -49,6 +49,8 @@ body * {
 .errorLine {
 	background-color: #622724;
 	text-align: right;
+	z-index: 99999 !important;
+	opacity: 0.5;
 }
 
 .toolbar {
