@@ -146,7 +146,10 @@ Class("Helper", {
 
 		for (var prop in object ) {
 			//if (object.hasOwnProperty(prop)) {
-				ul.appendChild(app.helper.li(prop, "object_prop", prop));
+				var li = app.helper.li(prop, "object_prop", "");
+				li.appendChild(app.helper.span("", "", prop));
+				li.appendChild(app.helper.span("", "", object[prop]));
+				ul.appendChild(li);
 			//}
 		}
 		$(ul).data("isOpen", "false");

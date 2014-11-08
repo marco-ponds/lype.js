@@ -46,6 +46,11 @@ body * {
 	padding-top: 20px;
 }
 
+.errorLine {
+	background-color: #622724;
+	text-align: right;
+}
+
 .toolbar {
 	position: fixed;
 	height:	40px;
@@ -281,7 +286,7 @@ border-radius: 4px;
 */
 .object_root .object_prop {
 	color:yellow;
-	margin-left:30px;
+	margin-left:20px;
 }
 
 .object_prop {

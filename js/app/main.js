@@ -10,6 +10,11 @@ Class("App", {
 	MIN_WIDTH : 800,
 	HEIGHT : 600,
 	WIDTH : 800,
+	LINT_CONFIG : {
+		undef : false,
+		unused : false
+	},
+	LINT_GLOBALS : "/*global alert $ window document console setInterval setTimeout require*/\n",
 
 	App : function() {
 		$('body').addClass("monokai");
@@ -35,7 +40,7 @@ Class("App", {
 		this.helper = new Helper();
 
 		this.createEditor(this.currentTab, "root.js", "javascript");
-
+		this.setUpLintWorker();
 	},
 
 	handleResize : function() {
@@ -77,10 +82,7 @@ Class("App", {
 		});
 		//if we are using node-webkit, we must provide a custom toolbar
 		if (this.environment == "node-webkit") {
-			console.log("setting toolbar");
 			this.setToolbar();
-		} else {
-			console.log("not setting toolbar");
 		}
 	},
 
@@ -91,14 +93,14 @@ Class("App", {
 		$('.toolbar.'+toHide).removeClass().addClass("toolbar invisible " + toHide);
 
 		$('#exit').on("click", function() {
-			console.log("inside exit click");
+			//console.log("inside exit click");
 			if (process) {
 				process.kill();
 			}
 		});
 
 		$('#reduce').on("click", function() {
-			console.log("inside reduce click");
+			//console.log("inside reduce click");
 		});
 
 		$('#enlarge').on("click", function() {
@@ -129,8 +131,48 @@ Class("App", {
 		});
 	},
 
+	setUpLintWorker : function() {
+		this.worker = new Worker("/js/app/worker.js");
+		this.worker.addEventListener("message", function(e){
+			var data = JSON.parse(e.data.result);
+			//console.log(data);
+			for (var k in data.errors) {
+				var error = data.errors[k];
+				//console.log(error.line-2);
+				app.editors[e.data.toCheck].codeMirror.addLineClass(error.line-2, "background", "errorLine");
+				app.editors[e.data.toCheck].saveError({
+					line : error.line-2,
+					reason : error.reason,
+					index : k
+				});
+				$($('.errorLine')[k]).html(error.reason);
+				//worker.terminate();
+			}
+		});
+	},
+
+	lint : function(){
+		for (var i=0; i< app.numTab; i++) {
+			if (app.editors[i].type == "javascript") {
+				app.editors[i].removeAllErrors();
+				app.editors[i].saveText();
+				var text = app.editors[i].text.join("\n");
+				text = app.LINT_GLOBALS + text;				
+				this.worker.postMessage({
+					task : "lint",
+					code : text,
+					config : app.LINT_CONFIG,
+					toCheck : i
+				});
+		 	} 
+			
+		}
+		
+	},
+
 	_eval : function() {
 		app.console.clearAllIntervals();
+		app.lint();
 		app.result.innerHTML = "";
 		for (var i=0; i< app.numTab; i++) {
 			switch (app.editors[i].type) {

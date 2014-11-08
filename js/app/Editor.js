@@ -5,6 +5,7 @@ Class("Editor", {
 		this.text = [];
 		this.name = name;
 		this.type = type;
+		this.errors = [];
 		this.compiled = "";
 		this.keyListener = new keypress.Listener();
 
@@ -25,7 +26,7 @@ Class("Editor", {
 	},
 
 	download : function() {
-		var filename = $("#tab_"+app.currentTab + " span").text();
+		var filename = $("#tab_" + app.currentTab + " span").text();
 		var text = app.editors[app.currentTab].text.join("\n");
 		var pom = document.createElement('a');
 		pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -36,7 +37,7 @@ Class("Editor", {
 	compile : function() {
 		this.saveText();
 		var compiled = CoffeeScript.compile(this.text.join("\n")).split("\n");
-		this.compiled = compiled.slice(1, compiled.length -2).join("\n");
+		this.compiled = compiled.slice(1, compiled.length-2).join("\n");
 		app._eval();
 	},
 
@@ -50,6 +51,18 @@ Class("Editor", {
 
 	_textToString : function() {
 		return this.text.join(" ");
+	},
+
+	saveError : function(error) {
+		this.errors.push(error);
+	},
+
+	removeAllErrors : function() {
+		for (var i in this.errors) {
+			$($('.errorLine')[this.errors[i].index]).html("");
+			this.codeMirror.removeLineClass(this.errors[i].line, "background", "errorLine");
+		}
+		this.errors = [];
 	},
 
 	setCodeListeners : function() {
