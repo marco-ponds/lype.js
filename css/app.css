@@ -259,6 +259,7 @@ border-radius: 4px;
 	margin-bottom: 10px;
 	/* position: relative; */
 	clear: both;
+	height: auto;
 }
 
 #result_content {
@@ -274,7 +275,8 @@ border-radius: 4px;
 	color: rgb(33, 189, 16);
 	margin-bottom: 20px;
 	padding-bottom: 20px;
-	border: 1px solid white;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
 .object_root i {
@@ -299,7 +301,9 @@ border-radius: 4px;
 .object_root .object_prop {
 	color:yellow;
 	margin-left:20px;
+	margin-right: 20px;
 	margin-bottom: 20px;
+	height: auto !important;
 	border-bottom: 1px solid grey;
 }
 

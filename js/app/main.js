@@ -213,8 +213,8 @@ Class("App", {
 			return;
 		}
 		
-		$('#add_tab').before(app.helper.li("tab_"+(app.numTab -1), "tab inactive", "<span>"+filename+"</span>"));
-		$('#editor_'+app.currentTab).after(app.helper.div("editor_"+(app.numTab-1), "editor invisible", ""));
+		$('#add_tab').before(app.helper.li("tab_"+(app.numTab -1), "tab inactive", "<span>"+filename+"</span>", {checkHtml : false}));
+		$('#editor_'+app.currentTab).after(app.helper.div("editor_"+(app.numTab-1), "editor invisible", "", {checkHtml : false}));
 		this.setTabListener();
 		var name = filename;
 		var type = filename.split(".")[1] == "coffee" ? "coffeescript" : "javascript";
@@ -249,19 +249,19 @@ Class("App", {
 	flash : function (message, type) {
 		switch(type) {
 			case "log" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "log", message));
+				document.getElementById("messages").appendChild(app.helper.li("", "log", message, {checkHtml : false}));
 				break;
 			}
 			case "warn" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "warn", message));
+				document.getElementById("messages").appendChild(app.helper.li("", "warn", message, {checkHtml : false}));
 				break;
 			}
 			case "err" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "err", message));
+				document.getElementById("messages").appendChild(app.helper.li("", "err", message, {checkHtml : false}));
 				break;
 			}
 			case "info" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "info", message));
+				document.getElementById("messages").appendChild(app.helper.li("", "info", message, {checkHtml : false}));
 				break;
 			}
 			default : break;

@@ -4,7 +4,7 @@ Class("Helper", {
 		this.counter = 0;
 	},
 
-	li : function(id, classes, content, type) {
+	li : function(id, classes, content, options) {
 		var c;
 		if (typeof(classes) == "object") {
 			c = "";
@@ -15,6 +15,15 @@ Class("Helper", {
 			c = classes;
 		} else {
 			throw this.CLASS_ERROR;
+		}
+		var type, checkHtml;
+		if (options) {
+			type = (options.type != undefined) ? options.type : "";
+			checkHtml = (options.checkHtml != undefined) ? options.checkHtml : true;
+		}
+		else {
+			type = "";
+			checkHtml = false;
 		}
 		switch(type) {
 			case "string" : {
@@ -24,8 +33,12 @@ Class("Helper", {
 				var li = document.createElement("li");
 				li.className = c;
 				li.id = id;
-				if (content.indexOf("<")!=-1) {
-					li.innerText = content;
+				if (checkHtml) {
+					if (content.indexOf("<")!=-1) {
+						li.innerText = content;
+					} else {
+						li.innerHTML = content;
+					}
 				} else {
 					li.innerHTML = content;
 				}
@@ -34,7 +47,7 @@ Class("Helper", {
 		}
 	},
 
-	i : function(id, classes, content, type) {
+	i : function(id, classes, content, options) {
 		var c;
 		if (typeof(classes) == "object") {
 			c = "";
@@ -45,6 +58,15 @@ Class("Helper", {
 			c = classes;
 		} else {
 			throw this.CLASS_ERROR;
+		}
+		var type, checkHtml;
+		if (options) {
+			type = (options.type != undefined) ? options.type : "";
+			checkHtml = (options.checkHtml != undefined) ? options.checkHtml : true;
+		}
+		else {
+			type = "";
+			checkHtml = false;
 		}
 		switch(type) {
 			case "string" : {
@@ -54,8 +76,12 @@ Class("Helper", {
 				var i = document.createElement("i");
 				i.className = c;
 				i.id = id;
-				if (content.indexOf("<")!=-1) {
-					i.innerText = content;
+				if (checkHtml) {
+					if (content.indexOf("<")!=-1) {
+						i.innerText = content;
+					} else {
+						i.innerHTML = content;
+					}
 				} else {
 					i.innerHTML = content;
 				}
@@ -64,7 +90,7 @@ Class("Helper", {
 		}
 	},
 
-	ul : function(id, classes, content, type) {
+	ul : function(id, classes, content, options) {
 		var c;
 		if (typeof(classes) == "object") {
 			c = "";
@@ -75,6 +101,15 @@ Class("Helper", {
 			c = classes;
 		} else {
 			throw this.CLASS_ERROR;
+		}
+		var type, checkHtml;
+		if (options) {
+			type = (options.type != undefined) ? options.type : "";
+			checkHtml = (options.checkHtml != undefined) ? options.checkHtml : true;
+		}
+		else {
+			type = "";
+			checkHtml = false;
 		}
 		switch(type) {
 			case "string" : {
@@ -84,8 +119,12 @@ Class("Helper", {
 				var ul = document.createElement("ul");
 				ul.className = c;
 				ul.id = id;
-				if (content.indexOf("<")!=-1) {
-					ul.innerText = content;
+				if (checkHtml) {
+					if (content.indexOf("<")!=-1) {
+						ul.innerText = content;
+					} else {
+						ul.innerHTML = content;
+					}
 				} else {
 					ul.innerHTML = content;
 				}
@@ -94,7 +133,7 @@ Class("Helper", {
 		}
 	},
 
-	div : function(id, classes, content, type) {
+	div : function(id, classes, content, options) {
 		var c;
 		if (typeof(classes) == "object") {
 			c = "";
@@ -105,6 +144,15 @@ Class("Helper", {
 			c = classes;
 		} else {
 			throw this.CLASS_ERROR;
+		}
+		var type, checkHtml;
+		if (options) {
+			type = (options.type != undefined) ? options.type : "";
+			checkHtml = (options.checkHtml != undefined) ? options.checkHtml : true;
+		}
+		else {
+			type = "";
+			checkHtml = false;
 		}
 		switch(type) {
 			case "string" : {
@@ -114,8 +162,12 @@ Class("Helper", {
 				var div = document.createElement("div");
 				div.className = c;
 				div.id = id;
-				if (content.indexOf("<")!=-1) {
-					div.innerText = content;
+				if (checkHtml) {
+					if (content.indexOf("<")!=-1) {
+						div.innerText = content;
+					} else {
+						div.innerHTML = content;
+					}
 				} else {
 					div.innerHTML = content;
 				}
@@ -124,7 +176,7 @@ Class("Helper", {
 		}
 	},
 
-	span : function(id, classes, content, type) {
+	span : function(id, classes, content, options) {
 		var c;
 		if (typeof(classes) == "object") {
 			c = "";
@@ -136,6 +188,15 @@ Class("Helper", {
 		} else {
 			throw this.CLASS_ERROR;
 		}
+		var type, checkHtml;
+		if (options) {
+			type = (options.type != undefined) ? options.type : "";
+			checkHtml = (options.checkHtml != undefined) ? options.checkHtml : true;
+		}
+		else {
+			type = "";
+			checkHtml = false;
+		}
 		switch(type) {
 			case "string" : {
 				return "<span id='"+id+"' class='"+c+"'>"+content+"</span>";
@@ -144,8 +205,12 @@ Class("Helper", {
 				var span = document.createElement("span");
 				span.className = c;
 				span.id = id;
-				if (content.indexOf("<")!=-1) {
-					span.innerText = content;
+				if (checkHtml) {
+					if (content.indexOf("<")!=-1) {
+						span.innerText = content;
+					} else {
+						span.innerHTML = content;
+					}
 				} else {
 					span.innerHTML = content;
 				}
@@ -160,16 +225,16 @@ Class("Helper", {
 
 	parseElement : function(object) {
 		var ul = app.helper.ul(""+this.counter, "object_root", "");
-		ul.appendChild(this.i(this.counter+"_selector", "fa fa-caret-right",object.constructor.name));
+		ul.appendChild(this.i(this.counter+"_selector", "fa fa-caret-right",object.constructor.name, {checkHtml : false}));
 		//ul.innerHTML += object.constructor.name;
 		this.counter += 1;
 
 		for (var prop in object ) {
 			//if (object.hasOwnProperty(prop)) {
 				var li = app.helper.li(prop, "object_prop", "");
-				li.appendChild(app.helper.span("key", "", prop));
+				li.appendChild(app.helper.span("key", "", prop, {checkHtml : false}));
 				var value = 
-				li.appendChild(app.helper.span("value", "", ""+object[prop]));
+				li.appendChild(app.helper.span("value", "", ""+object[prop], {checkHtml : true}));
 				ul.appendChild(li);
 			//}
 		}
