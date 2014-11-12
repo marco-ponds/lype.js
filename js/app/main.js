@@ -1,6 +1,7 @@
 include("app/Editor");
 include("app/Helper");
 include("app/Console");
+include("app/Ui");
 
 Class("App", {
 
@@ -20,8 +21,6 @@ Class("App", {
 		$('body').addClass("monokai");
 
 		this.detectEnvinronment();
-		this.setSizes();
-		this.setClickListeners();
 		this.setTabListener();
 
 		this.availableThemes = ["monokai"];
@@ -32,11 +31,13 @@ Class("App", {
 		this.editors = [];
 		this.result = document.getElementById("result_content");
 
+		this.consoleVisible = true;
+
 		//node-webkit
 		this.enlarged = false;
 
 		this.console = new Console();
-		//this.console.set();
+		this.ui = new Interface();
 		this.helper = new Helper();
 
 		this.createEditor(this.currentTab, "root.js", "javascript");
@@ -44,7 +45,7 @@ Class("App", {
 	},
 
 	handleResize : function() {
-		app.setSizes();
+		app.ui.setSizes();
 	},
 
 	detectEnvinronment : function() {
@@ -60,29 +61,6 @@ Class("App", {
 			this.environment = "node-webkit";
 		} else {
 			this.environment = "browser";
-		}
-	},
-
-	setSizes : function() {
-		var height = ($(document).height() - 150) + "px";
-		$('#main_container').css("height", height);
-		$('#coffee_compiler').css("top", ($('#main_container').height() + 30) + "px");
-	},
-
-	setClickListeners : function() {
-		//new tab button
-		$('#add_tab').on("click", function() {
-			app.addNewTab();
-		});
-		//coffee compiler button
-		$('#coffee_compiler').on("click", function() {
-			if (app.editors[app.currentTab].type == "coffeescript") {
-				app.editors[app.currentTab].compile();
-			}
-		});
-		//if we are using node-webkit, we must provide a custom toolbar
-		if (this.environment == "node-webkit") {
-			this.setToolbar();
 		}
 	},
 
@@ -163,7 +141,7 @@ Class("App", {
 				app.editors[i].removeAllJBoxes();
 				app.editors[i].saveText();
 				var text = app.editors[i].text.join("\n");
-				text = app.LINT_GLOBALS + text;				
+				text = app.LINT_GLOBALS + text;
 				this.worker.postMessage({
 					task : "lint",
 					code : text,
@@ -244,28 +222,5 @@ Class("App", {
 		}
 		this.currentTab = tab;
 		this.editors[tab].focus();
-	},
-	
-	flash : function (message, type) {
-		switch(type) {
-			case "log" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "log", message, {checkHtml : false}));
-				break;
-			}
-			case "warn" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "warn", message, {checkHtml : false}));
-				break;
-			}
-			case "err" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "err", message, {checkHtml : false}));
-				break;
-			}
-			case "info" : {
-				document.getElementById("messages").appendChild(app.helper.li("", "info", message, {checkHtml : false}));
-				break;
-			}
-			default : break;
-		}
 	}
-
 });

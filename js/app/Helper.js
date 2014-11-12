@@ -231,7 +231,7 @@ Class("Helper", {
 
 		for (var prop in object ) {
 			//if (object.hasOwnProperty(prop)) {
-				var li = app.helper.li(prop, "object_prop", "");
+				var li = app.helper.li("prop_"+prop, "object_prop", "");
 				li.appendChild(app.helper.span("key", "", prop, {checkHtml : false}));
 				var value = 
 				li.appendChild(app.helper.span("value", "", ""+object[prop], {checkHtml : true}));

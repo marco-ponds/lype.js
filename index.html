@@ -48,9 +48,13 @@
 			</ul>
 		</div>
 
-		<div id="upper_console"></div>
-		<div id="main_container">
+		<div id="upper_console">
+			<div class="toggle" id="canvasToggle">CANVAS</div>
+			<div class="toggle" id="consoleToggle">CONSOLE</div>
+			<div class="toggle" id="fullscreenToggle">FULLSCREEN</div>
+		</div>
 
+		<div id="main_container" class="monokai">
 
 			<div class="editor visible" id="editor_0">
 			</div>
@@ -73,6 +77,7 @@
 			window.onload = function() {
 				app = new App();
 				app.console.set();
+				app.ui.set();
 			}
 			window.onresize = function() {
 				if (app) {
