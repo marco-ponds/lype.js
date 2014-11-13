@@ -3,16 +3,25 @@ Class("Interface", {
 	// class init
 	Interface : function() {
 		this.fullscreenToggle = $('#fullscreenToggle');
+		this.consoleToggle = $('#consoleToggle');
+		this.canvasToggle = $('#canvasToggle');
 	},
 
 	set : function() {
 		this.setSizes();
 		this.setClickListeners();
+		this.toggleFrames("console");
+		var obj = createCanvas("2d");
+		canvas = obj.canvas;
+		context = obj.context;
+		dom_container.appendChild(canvas);
 	},
 
 	setClickListeners : function() {
 		//setting click listener on toggleFullScreen.
 		this.fullscreenToggle.on('click', app.ui.onClickFullscreen);
+		this.canvasToggle.on("click", function() {app.ui.toggleFrames("canvas");});
+		this.consoleToggle.on("click", function() {app.ui.toggleFrames("console");});
 
 		//new tab button
 		$('#add_tab').on("click", function() {
@@ -70,10 +79,35 @@ Class("Interface", {
 		var height = ($(document).height() - 150) + "px";
 		$('#main_container').css("height", height);
 		$('#coffee_compiler').css("top", ($('#main_container').height() + 30) + "px");
+
+		//Resetting canvas height and width on document resize.
+		if (canvas) {
+			canvas.height = $('#canvas').height() < $('#console').height() ? $('#console').height() : $('#canvas').height() ;
+			canvas.width = $('#canvas').width() < $('#console').width() ? $('#console').width() : $('#canvas').width() ;
+		}
 	},
 
 	//TOGGLING RESULTS /html container and console.
-	toggleResults : function() {
+	toggleFrames : function(frame) {
+			if (frame == "console") {
+				$('#console').removeClass("invisible").addClass("visible");
+				$('#canvas').removeClass("visible").addClass("invisible");
+				app.ui.consoleToggle.addClass("active");
+				app.ui.canvasToggle.removeClass("active");
+			}
+			else if (frame == "canvas") {
+				$('#console').removeClass("visible").addClass("invisible");
+				$('#canvas').removeClass("invisible").addClass("visible");
+				app.ui.consoleToggle.removeClass("active");
+				app.ui.canvasToggle.addClass("active");
+			}
+			else {
+				$('#console').removeClass("invisible").addClass("visible");
+				$('#canvas').removeClass("visible").addClass("invisible");
+				app.ui.consoleToggle.addClass("active");
+				app.ui.canvasToggle.removeClass("active");
+			}
+		/*
 		if (this.consoleVisible) {
 			$('#result').css("display", "none");
 			$('.editor').css("width", "100%");
@@ -83,10 +117,17 @@ Class("Interface", {
 			$('.editor').css("width", "50%");
 			this.consoleVisible = true;
 		}
+		*/
+	},
+
+	clearCanvas : function() {
+		if (canvas && context) {
+			context.clearRect(0, 0, canvas.height, canvas.width);
+		}
 	},
 
 	//METHOD TO FLASH MESSAGES
-	flash : function (message, type) {
+	flash : function(message, type) {
 		switch(type) {
 			case "log" : {
 				document.getElementById("messages").appendChild(app.helper.li("", "log", message, {checkHtml : false}));
@@ -107,4 +148,26 @@ Class("Interface", {
 			default : break;
 		}
 	}
-})
+});
+
+var jq_container = $('#canvas');
+var dom_container = document.getElementById("canvas");
+var canvas, context;
+
+function createCanvas (type) {
+	var canvas = document.createElement("canvas");
+	canvas.height = $('#canvas').height() < $('#console').height() ? $('#console').height() : $('#canvas').height() ;
+	canvas.width = $('#canvas').width() < $('#console').width() ? $('#console').width() : $('#canvas').width() ;
+
+	if (type == "2d") {
+		var context = canvas.getContext("2d");
+		return {
+			"canvas" : canvas,
+			"context" : context
+		};
+	} else {
+
+	}
+}
+
+

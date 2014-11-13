@@ -156,6 +156,7 @@ Class("App", {
 
 	_eval : function() {
 		app.console.clearAllIntervals();
+		app.ui.clearCanvas();
 		app.lint();
 		app.result.innerHTML = "";
 		for (var i=0; i< app.numTab; i++) {

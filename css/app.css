@@ -277,7 +277,7 @@ body * {
 	border-radius: 4px;
 }
 
-#result {
+.result {
 	position:absolute;
 	height:100%;
 	width:50%;
@@ -286,7 +286,7 @@ body * {
 	margin-left: 1px;
 }
 
-#result * {
+.result * {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -295,7 +295,7 @@ body * {
 	user-select: none;
 }
 
-#result li {
+#result_content li {
 	list-style: none;
 	margin-bottom: 10px;
 	/* position: relative; */
