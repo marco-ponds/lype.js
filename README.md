@@ -34,7 +34,7 @@ If you edit an old .coffee tab, you have to click again on "compile" to use the 
 
 ######Console
 This is VERY important. This is the console, where all of your output goes. If you write:
-```prettyprint lang-javascript
+```javascript
 	console.log(window);
 ```
 Your console will show you an inspection of the window object, just like you were able to see in Chrome Dev Tools. This feature it's still a work in progress, a lot of improvements are needed.
