@@ -4,6 +4,17 @@ LYPE stands for Live Type. It's a single page web application, and it will allow
 
 This project is entirely Open Source. Feel free to browse my code (please, don't judge it), fork my repo. Contributions are greatly appreciated.
 
+-----
+###Usage
+
+1. Clone my [repo](https://github.com/marco-ponds/lype.js) and run index.html using:
+```python
+	python -m SimpleHTTPServer
+```
+
+2. Build your app.nw with Node-Webkit. In the future i'll provide a standalone app for Windows, Mac and Linux.
+
+----
 
 ###TONS of features.
 
