@@ -1,4 +1,4 @@
-#LYPE
+#[LYPE](http://marcostagni.com/projects/lype)
 
 LYPE stands for Live Type. It's a single page web application, and it will allow you to create, edit and debug your javascript/coffeescript code directly inside your browser. The main purpose of this app is to provide a "safe" place where experiment and test your code, with live response from the page. It's still a work in progress, but it already have a bunch of useful features.
 
