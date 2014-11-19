@@ -122,7 +122,7 @@ Class("App", {
 	},
 
 	setUpLintWorker : function() {
-		this.worker = new Worker("/js/app/worker.js");
+		this.worker = new Worker("js/app/worker.js");
 		this.worker.addEventListener("message", function(e){
 			var data = JSON.parse(e.data.result);
 			//console.log(data);
