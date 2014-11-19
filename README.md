@@ -14,6 +14,8 @@ This project is entirely Open Source. Feel free to browse my code (please, don't
 
 2. Build your app.nw with Node-Webkit. In the future i'll provide a standalone app for Windows, Mac and Linux.
 
+3. [Check the project live on my website](http://marcostagni.com/projects/lype). 
+
 ----
 
 ###TONS of features.

@@ -74,19 +74,5 @@
 
 			<div id="coffee_compiler" class="invisible">COMPILE</div>
 		</div>
-
-		<script type="text/javascript">
-			var app;
-			window.onload = function() {
-				app = new App();
-				app.console.set();
-				app.ui.set();
-			}
-			window.onresize = function() {
-				if (app) {
-					app.handleResize();
-				}
-			}
-		</script>
 	</body>
 </html>

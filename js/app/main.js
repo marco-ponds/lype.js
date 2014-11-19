@@ -1,3 +1,15 @@
+var app;
+window.onload = function() {
+	app = new App();
+	app.console.set();
+	app.ui.set();
+};
+window.onresize = function() {
+	if (app) {
+		app.handleResize();
+	}
+};
+
 include("app/Editor");
 include("app/Helper");
 include("app/Console");
