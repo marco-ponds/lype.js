@@ -11,10 +11,18 @@ Class("Interface", {
 		this.setSizes();
 		this.setClickListeners();
 		this.toggleFrames("console");
+		this.addCanvas();
+	},
+
+	addCanvas : function() {
 		var obj = createCanvas("2d");
 		canvas = obj.canvas;
 		context = obj.context;
 		dom_container.appendChild(canvas);
+		return {
+			"canvas" : canvas,
+			"context" : context
+		}
 	},
 
 	setClickListeners : function() {
@@ -76,7 +84,7 @@ Class("Interface", {
 
 	//SET SIZE METHOD
 	setSizes : function() {
-		var height = ($(document).height() - 150) + "px";
+		var height = ($(document).height() - 120) + "px";
 		$('#main_container').css("height", height);
 		$('#coffee_compiler').css("top", ($('#main_container').height() + 30) + "px");
 
