@@ -84,7 +84,7 @@ Class("Interface", {
 
 	//SET SIZE METHOD
 	setSizes : function() {
-		var height = ($(document).height() - 120) + "px";
+		var height = ($(document).height() - 150) + "px";
 		$('#main_container').css("height", height);
 		$('#coffee_compiler').css("top", ($('#main_container').height() + 30) + "px");
 

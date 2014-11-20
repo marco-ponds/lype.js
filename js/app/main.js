@@ -40,6 +40,7 @@ Class("App", {
 		this.currentTheme = "monokai";
 		this.currentTab = 0;
 		this.numTab = 1;
+		this.activeTabs = 1;
 		this.editors = [];
 		this.result = document.getElementById("result_content");
 
@@ -119,6 +120,13 @@ Class("App", {
 			var tab = parseInt(id.substr(4, id.length));
 			app.selectTab(tab);
 		});
+
+		$('.tab .close').unbind("click");
+		$(".tab .close").on("click", function() {
+			var id = $(this).parent().attr("id");
+			var tab = parseInt(id.substr(4, id.length));
+			app.removeTab(tab);
+		});
 	},
 
 	setUpLintWorker : function() {
@@ -188,9 +196,10 @@ Class("App", {
 
 	addNewTab : function() {
 		var previous = this.currentTab;
-		if ((this.numTab+1) > this.MAX_NUM_TABS) return;
+		if ((this.activeTabs+1) > this.MAX_NUM_TABS) return;
 		
 		this.numTab ++;
+		this.activeTabs ++;
 		//selecting new tab
 		var filename = prompt("Please insert script's name.");
 
@@ -204,7 +213,8 @@ Class("App", {
 			return;
 		}
 		
-		$('#add_tab').before(app.helper.li("tab_"+(app.numTab -1), "tab inactive", "<span>"+filename+"</span>", {checkHtml : false}));
+
+		$('#add_tab').before(app.helper.li("tab_"+(app.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+filename+"</span>", {checkHtml : false}));
 		$('#editor_'+app.currentTab).after(app.helper.div("editor_"+(app.numTab-1), "editor invisible", "", {checkHtml : false}));
 		this.setTabListener();
 		var name = filename;
@@ -234,6 +244,25 @@ Class("App", {
 			$("#coffee_compiler").removeClass().addClass("invisible");
 		}
 		this.currentTab = tab;
-		this.editors[tab].focus();
+		//this.editors[tab].focus();
+		$('#editor_'+tab).click();
+	},
+
+	removeTab : function(tab) {
+		if (tab == 0) {
+			//can we remove the first tab??
+		} else {
+			if (tab > this.MAX_NUM_TABS) return;
+
+			if (this.editors[tab].type == "coffeescript") {
+				$("#coffee_compiler").removeClass().addClass("invisible");
+			}
+
+			$('#editor_'+tab).remove();
+			$('#tab_'+tab).remove();
+			this.activeTabs -= 1; 
+			//this.editors[tab] = {};
+			this.selectTab(tab-1);
+		}
 	}
 });

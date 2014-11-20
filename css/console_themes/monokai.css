@@ -9,6 +9,15 @@
 	color:#898c88;
 }
 
+#tabs ul li.tab.inactive .close {
+	border-color:#898c88;
+}
+
+#tabs ul li.tab .close:hover {
+	color: #fff;
+	background-color: #f29897;
+}
+
 #tabs ul li.tab.active {
 	background-color: #272822;
 	color:white;
