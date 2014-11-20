@@ -11,6 +11,15 @@ body * {
 	-webkit-app-region: no-drag;
 }
 
+#title {
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin: 10px;
+	font-size: 24px;
+	font-family: "Open Sans Condensed", sans-serif;
+}
+
 .CodeMirror {
 	height: 100% !important;
 }

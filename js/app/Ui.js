@@ -107,17 +107,6 @@ Class("Interface", {
 				app.ui.consoleToggle.addClass("active");
 				app.ui.canvasToggle.removeClass("active");
 			}
-		/*
-		if (this.consoleVisible) {
-			$('#result').css("display", "none");
-			$('.editor').css("width", "100%");
-			this.consoleVisible = false;
-		} else {
-			$('#result').css("display", "visible");
-			$('.editor').css("width", "50%");
-			this.consoleVisible = true;
-		}
-		*/
 	},
 
 	clearCanvas : function() {
