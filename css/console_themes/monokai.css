@@ -16,6 +16,7 @@
 #tabs ul li.tab .close:hover {
 	color: #fff;
 	background-color: #f29897;
+	text-shadow: -1px 1px #000000;
 }
 
 #tabs ul li.tab.active {
