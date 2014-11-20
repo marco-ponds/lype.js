@@ -38,11 +38,16 @@ Class("Editor", {
 	compile : function() {
 		this.saveText();
 		$('#coffee_compiler i').removeClass().addClass("fa fa-circle-o-notch fa-spin");
-		var compiled = CoffeeScript.compile(this.text.join("\n")).split("\n");
-		this.compiled = compiled.slice(1, compiled.length-2).join("\n");
-		$('#coffee_compiler i').css("color", "green");
-		$('#coffee_compiler i').removeClass().addClass("fa fa-check");
-		app._eval();
+		try {
+			var compiled = CoffeeScript.compile(this.text.join("\n")).split("\n");
+			this.compiled = compiled.slice(1, compiled.length-2).join("\n");
+			app._eval();
+			$('#coffee_compiler i').css("color", "green");
+			$('#coffee_compiler i').removeClass().addClass("fa fa-check");
+		} catch (e) {
+			$('#coffee_compiler i').css("color", "red");
+			$('#coffee_compiler i').removeClass().addClass("fa fa-remove");
+		}
 		setTimeout(function() {
 			$('#coffee_compiler i').removeClass().addClass("fa");
 			$('#coffee_compiler i').css("color", "white");
