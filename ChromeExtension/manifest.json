@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Lype",
+  "description": "Lype is a fast javascript/coffeescript editor to live change your web page.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}

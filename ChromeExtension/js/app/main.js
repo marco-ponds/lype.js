@@ -1,7 +1,7 @@
 var app;
 window.onload = function() {
 	app = new App();
-	app.console.set();
+	//app.console.set();
 	app.ui.set();
 };
 window.onresize = function() {
@@ -9,11 +9,6 @@ window.onresize = function() {
 		app.handleResize();
 	}
 };
-
-include("js/app/Editor");
-include("js/app/Helper");
-include("js/app/Console");
-include("js/app/Ui");
 
 Class("App", {
 
@@ -42,19 +37,19 @@ Class("App", {
 		this.numTab = 1;
 		this.activeTabs = 1;
 		this.editors = [];
-		this.result = document.getElementById("result_content");
+		//this.result = document.getElementById("result_content");
 
 		this.consoleVisible = true;
 
 		//node-webkit
 		this.enlarged = false;
 
-		this.console = new Console();
+		//this.console = new Console();
 		this.ui = new Interface();
 		this.helper = new Helper();
 
 		this.createEditor(this.currentTab, "root.js", "javascript");
-		this.setUpLintWorker();
+		//this.setUpLintWorker();
 	},
 
 	handleResize : function() {
@@ -175,19 +170,37 @@ Class("App", {
 	},
 
 	_eval : function() {
-		app.console.clearAllIntervals();
+		//app.console.clearAllIntervals();
 		app.ui.clearCanvas();
-		app.lint();
-		app.result.innerHTML = "";
+		//app.lint();
+		//app.result.innerHTML = "";
+		chrome.tabs.executeScript(null, {code: "console.clear();"}, function() {
+			if (chrome.runtime.lastError) {
+				console.log(chrome.runtime.lastError.message);
+			}
+		});
 		for (var i=0; i< app.numTab; i++) {
 			switch (app.editors[i].type) {
 				case "javascript" : {
 					app.editors[i].saveText();
-					eval(app.editors[i]._textToString());
+					if (!chrome.runtime.lastError)
+						chrome.tabs.executeScript(null, {code: app.editors[i]._textToString()}, function() {
+							if (chrome.runtime.lastError) {
+								console.log(chrome.runtime.lastError.message);
+							}
+						});
+					//new Function("document", "window", app.editors[i]._textToString()).call(window, document, window);
+					//eval(app.editors[i]._textToString());
 				}
 				case "coffeescript" : {
 					app.editors[i].saveText();
-					eval(app.editors[i].compiled);
+					if (!chrome.runtime.lastError)
+						chrome.tabs.executeScript(null, {code: app.editors[i].compiled}, function() {
+							if (chrome.runtime.lastError) {
+								console.log(chrome.runtime.lastError.message);
+							}
+						});
+					//new Function("document", "window", app.editors[i].compiled).call(window, document, window);
 				}
  			} 
 			

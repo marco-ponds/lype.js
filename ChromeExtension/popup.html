@@ -1,0 +1,74 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Lype</title>
+
+    <script type="text/javascript" src="js/lib/classy.js"></script>
+    <script type="text/javascript" src="js/lib/codemirror.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/keypress.js"></script>
+    <script type="text/javascript" src="js/lib/jshint.js"></script>
+    <script type="text/javascript" src="js/lib/jBox.min.js"></script>
+    <script type="text/javascript" src="js/lib/coffee-script.js"></script>
+    <script type="text/javascript" src="js/lib/addons/javascript.js"></script>
+    <script type="text/javascript" src="js/lib/addons/coffeescript.js"></script>
+    <script type="text/javascript" src="js/lib/addons/active-line.js"></script>
+    <script type="text/javascript" src="js/lib/addons/matchbrackets.js"></script>
+    <script type="text/javascript" src="js/lib/addons/closebrackets.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/jBox.css">
+    <link rel="stylesheet" type="text/css" href="css/TooltipDark.css">
+    <link rel="stylesheet" type="text/css" href="css/console_themes/monokai.css">
+    <link rel="stylesheet" type="text/css" href="css/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/monokai.css">
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
+    <script type="text/javascript" src="js/app/Editor.js"></script>
+    <script type="text/javascript" src="js/app/Helper.js"></script>
+    <!--<script type="text/javascript" src="js/app/Console.js"></script>-->
+    <script type="text/javascript" src="js/app/Ui.js"></script>
+
+    <style>
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <script type="text/javascript" src="js/app/main.js"></script>
+  </head>
+    <body>
+
+        <div id="tabs">
+            <div id="title">LYPE</div>
+            <ul>
+                <li id="tab_0" class="tab active">
+                    <i class="fa fa-remove close"></i>
+                    <span>Root.js</span>
+                </li>
+                <li id="add_tab">+</li>
+            </ul>
+        </div>
+
+
+        <div id="main_container" class="monokai">
+
+            <div class="editor visible" id="editor_0">
+            </div>
+
+            <i class="fa fa-exclamation-circle" id="errorAlert"></i>
+
+            <div id="coffee_compiler" class="invisible">
+                <i class="fa"></i>
+                COMPILE
+            </div>
+        </div>
+    </body>
+</html>
+

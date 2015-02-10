@@ -1,0 +1,39 @@
+.monokai {
+	background: #272822;
+	color: #f8f8f2;
+	font-family: monospace;
+}
+
+#tabs ul li.tab.inactive {
+	background-color: #3a3a38;
+	color:#898c88;
+}
+
+#tabs ul li.tab.inactive .close {
+	border-color:#898c88;
+}
+
+#tabs ul li.tab .close:hover {
+	color: #fff;
+	background-color: #f29897;
+	text-shadow: -1px 1px #000000;
+}
+
+#tabs ul li.tab.active {
+	background-color: #272822;
+	color:white;
+	border-top: 1px solid #2e2f2a;
+	border-left: 1px solid #2e2f2a;
+	border-right: 1px solid #2e2f2a;
+	border-bottom: 1px solid #272822;
+	z-index: 999;
+}
+
+#tabs, #upper_console {
+	background-color: #1B221E;
+}
+
+#tabs ul li#add_tab:hover, #coffee_compiler:hover {
+	color: #fff;
+	background-color: #3a3a38;
+}
