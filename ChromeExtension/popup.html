@@ -1,5 +1,9 @@
 <!doctype html>
-
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
 <html>
   <head>
     <title>Lype</title>
@@ -29,7 +33,7 @@
 
     <script type="text/javascript" src="js/app/Editor.js"></script>
     <script type="text/javascript" src="js/app/Helper.js"></script>
-    <!--<script type="text/javascript" src="js/app/Console.js"></script>-->
+    <script type="text/javascript" src="js/app/Storage.js"></script>
     <script type="text/javascript" src="js/app/Ui.js"></script>
 
     <style>

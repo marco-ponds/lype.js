@@ -1,6 +1,7 @@
 var app;
 window.onload = function() {
 	app = new App();
+	app.init();
 	//app.console.set();
 	app.ui.set();
 };
@@ -48,8 +49,21 @@ Class("App", {
 		this.ui = new Interface();
 		this.helper = new Helper();
 
-		this.createEditor(this.currentTab, "root.js", "javascript");
+		
 		//this.setUpLintWorker();
+	},
+
+	init: function() {
+		//creating storage element
+		this.db = new DB();
+		if (this.db.saved) {
+			this.db.restore();
+		} else {
+			this.createEditor(this.currentTab, "root.js", "javascript");
+		}
+		this.autoSave = setInterval(function() {
+			app.db.save();
+		}, 500);
 	},
 
 	handleResize : function() {
@@ -184,7 +198,8 @@ Class("App", {
 				case "javascript" : {
 					app.editors[i].saveText();
 					if (!chrome.runtime.lastError)
-						chrome.tabs.executeScript(null, {code: app.editors[i]._textToString()}, function() {
+						var toEvaluate = "new Function('"+app.editors[i]._textToString()+"').bind(window).call(window, document, window);";
+						chrome.tabs.executeScript(null, {code: toEvaluate}, function() {
 							if (chrome.runtime.lastError) {
 								console.log(chrome.runtime.lastError.message);
 							}
@@ -195,6 +210,7 @@ Class("App", {
 				case "coffeescript" : {
 					app.editors[i].saveText();
 					if (!chrome.runtime.lastError)
+						var toEvaluate = "new Function('"+app.editors[i].compiled+"').bind(window).call(window, document, window);";
 						chrome.tabs.executeScript(null, {code: app.editors[i].compiled}, function() {
 							if (chrome.runtime.lastError) {
 								console.log(chrome.runtime.lastError.message);
@@ -232,6 +248,22 @@ Class("App", {
 		this.setTabListener();
 		var name = filename;
 		var type = filename.split(".")[1] == "coffee" ? "coffeescript" : "javascript";
+		this.createEditor((app.numTab -1), name, type);
+		this.selectTab((app.numTab -1));
+	},
+
+	_restoreTab: function(name, type) {
+		var previous = this.currentTab;
+		if ((this.activeTabs+1) > this.MAX_NUM_TABS) return;
+		
+		this.numTab ++;
+		this.activeTabs ++;
+
+		$('#add_tab').before(app.helper.li("tab_"+(app.numTab -1), "tab inactive", "<i class='fa fa-remove close'></i><span>"+name+"</span>", {checkHtml : false}));
+		$('#editor_'+app.currentTab).after(app.helper.div("editor_"+(app.numTab-1), "editor invisible", "", {checkHtml : false}));
+		this.setTabListener();
+		//var name = filename;
+		//var type = filename.split(".")[1] == "coffee" ? "coffeescript" : "javascript";
 		this.createEditor((app.numTab -1), name, type);
 		this.selectTab((app.numTab -1));
 	},
